@@ -1,41 +1,39 @@
+from pytest import mark
+
+
 def fizzbuzz(n):
-    if n % 3 == 0 and n % 5 == 0:
+    if is_dividabale_by(n, 3) and is_dividabale_by(n, 5):
         return "fizzbuzz"
-    if n % 3 == 0:
+    if is_dividabale_by(n,3):
         return "fizz"
-    if n % 5 == 0:
+    if is_dividabale_by(n, 5):
         return "buzz"
     return str(n)
 
 
-def test_with_1():
-    res = fizzbuzz(1)
-    assert res == "1"
-
-def test_with_2():
-    res = fizzbuzz(2)
-    assert res == "2"
+def is_dividabale_by(n, div):
+    return n % div == 0
 
 
-def test_with_3():
-    res = fizzbuzz(3)
+@mark.parametrize("num", [1, 2, 4])
+def test_given_any_number_that_is_not_dividabale_by_3_and_5_return_number_itself(num):
+    res = fizzbuzz(num)
+    assert res == str(num)
+
+
+@mark.parametrize("num", [3, 6, 9])
+def test_given_any_number_that_is_dividabale_by_3_but_not_by_5_return_fizz(num):
+    res = fizzbuzz(num)
     assert res == "fizz"
 
 
-def test_with_5():
-    res = fizzbuzz(5)
+@mark.parametrize("num", [5, 10, 20])
+def test_given_any_number_that_is_dividabale_by_5_but_not_by_3_return_buzz(num):
+    res = fizzbuzz(num)
     assert res == "buzz"
 
 
-def test_with_6():
-    res = fizzbuzz(6)
-    assert res == "fizz"
-
-
-def test_with_10():
-    res = fizzbuzz(10)
-    assert res == "buzz"
-
-def test_with_15():
-    res = fizzbuzz(15)
+@mark.parametrize("num", [15, 30, 45])
+def test_given_any_number_that_is_dividabale_by_3_and_by_5_return_buzz(num):
+    res = fizzbuzz(num)
     assert res == "fizzbuzz"
