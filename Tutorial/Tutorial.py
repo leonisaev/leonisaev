@@ -6,7 +6,7 @@ def data_types_vars_and_print_1():
     bool: True, False
 
     """
-    tim = "hello"
+    string_var = "hello"
     myVariable = True
 
     myVariable = 3
